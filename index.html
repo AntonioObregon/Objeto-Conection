@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ejemplo 14-1</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<script type="text/javascript" charset="utf-8" rc="jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+           
+
+
+function onBodyLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+}
+
+function onDeviceReady() {
+        navigator.notification.alert("PhoneGap is ready!");
+
+                document.addEventListener("online", isOnline, false);
+
+                document.addEventListener("offline", isOffline, false);
+}
+
+
+function isOnline() {
+                        var d = new Date();
+                        $('#networkInfo').prepend("En linea (" + getConnectionTypeStr() + ")<br />");
+}
+function isOffline() {
+                            var d = new Date();
+                            $('#networkInfo').prepend("Sin conexión<br />");
+}
+function getConnectionTypeStr() {
+
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Conexión desconocida';
+    states[Connection.ETHERNET] = 'Conexión ethernet';
+    states[Connection.WIFI]     = 'Conexión WiFi';
+    states[Connection.CELL_2G]  = 'Conexión celular 2G';
+    states[Connection.CELL_3G]  = 'Conexión celular 3G';
+    states[Connection.CELL_4G]  = 'Conexión celular 4G';
+    states[Connection.CELL]     = 'Conexión celular genérica';
+    states[Connection.NONE]     = 'Sin conexión de red';
+
+    var networkState = navigator.connection.type;
+
+                return states[networkState];
+}
+
+
+</script>
+</head>
+<body onload="onBodyLoad()">
+<h1>Ejemplo 14-1</h1>
+<p id="networkInfo"></p>
+<input type="button" value="Revisar" onclick="isOnline();">
+
+</body>
+</body>
+</html>
